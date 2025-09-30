@@ -19,22 +19,18 @@ export const Home = () => {
       });
   };
 
-  // const getHomeworld = () => {
-  //   fetch(store.baseURL + "/planets/" + store.homeworld)
-  //     .then((allHomeworlds) => {
-  //       return allHomeworlds.json();
-  //     })
-  //     .then((data) => {
-  //       dispatch({
-  //         type: "set-homeworld",
-  //         payload: data.results,
-  //       });
-  //     });
-  // };
+  const getPeopleMass = (personUID) => {
+    fetch(store.baseURL + "/people/" + personUID)
+      .then((personMass) => {
+        return personMass.json();
+      })
+      .then((data) => { 
+        store.mass = data.result.properties.mass;
+      });
+  };
 
   useEffect(() => {
     getPeople();
-    // getHomeworld();
   }, []);
 
   if (store.people.length == 0) {
@@ -45,25 +41,31 @@ export const Home = () => {
       <section>
         <h2 className="text-warning bg-dark text-start ms-5">Characters</h2>
         <div className="row flex-nowrap overflow-auto">
-        {store.people.length > 0 ? (
-          store.people.map((person, index) => {
-            return (
-              <div className="col">
-                <img src={
-                "https://upload.wikimedia.org/wikipedia/commons/c/ce/Star_wars2.svg"
-              } alt="" className="profile-image"/>
-                <h3>{person.name}</h3>
-                <ul>
-                  <li>Planet: {store.homeworld}</li>
-                  <li></li>
-                  <li></li>
-                </ul>
-              </div>
-            );
-          })
-        ) : (
-          <h2 className="loading bg-info-subtle ms-5">Loading...</h2>
-        )}
+          {store.people.length > 0 ? (
+            store.people.map((person, index) => {
+              getPeopleMass(index);
+              return (
+                <div key={index} className="col">
+                  <img
+                    src={
+                      "https://upload.wikimedia.org/wikipedia/commons/c/ce/Star_wars2.svg"
+                    }
+                    alt=""
+                    className="profile-image"
+                  />
+                  <h3>{person.name}</h3>
+                  <h3>{store.mass}</h3>
+                  <ul>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                  </ul>
+                </div>
+              );
+            })
+          ) : (
+            <h2 className="loading bg-info-subtle ms-5">Loading...</h2>
+          )}
         </div>
       </section>
     </div>
