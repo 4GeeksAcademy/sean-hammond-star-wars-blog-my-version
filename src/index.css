@@ -1,3 +1,7 @@
+img#site-logo {
+    width: 70px;
+}
+
 .loading {
     color: red;
 }

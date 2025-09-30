@@ -1,4 +1,3 @@
-import rigoImageUrl from "../assets/img/rigo-baby.jpg";
 import useGlobalReducer from "../hooks/useGlobalReducer.jsx";
 import React, { useEffect, useState } from "react";
 
@@ -39,13 +38,6 @@ export const Home = () => {
             );
           })
         : <p className="loading bg-info-subtle">Loading...</p>}
-      <p>
-        <img
-          src={
-            "https://upload.wikimedia.org/wikipedia/commons/c/ce/Star_wars2.svg"
-          }
-        />
-      </p>
     </div>
   );
 };
