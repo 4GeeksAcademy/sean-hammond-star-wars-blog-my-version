@@ -1,19 +1,22 @@
 import rigoImageUrl from "../assets/img/rigo-baby.jpg";
 import useGlobalReducer from "../hooks/useGlobalReducer.jsx";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 export const Home = () => {
-  const baseURL = "https://www.swapi.tech/api";
-
   const { store, dispatch } = useGlobalReducer();
+  // const [peopleList, setPeopleList] = useState([]);
 
   const getPeople = () => {
-    fetch(baseURL + "/people")
+    fetch(store.baseURL + "/people")
       .then((allPeople) => {
         return allPeople.json();
       })
       .then((data) => {
-        console.log("Star Wars people from SWAPI.tech API:", data.results);
+        dispatch({
+          type: "set-people",
+          payload: data.results,
+        });
+        // setPeopleList(store.people);
       });
   };
 
@@ -21,11 +24,27 @@ export const Home = () => {
     getPeople();
   }, []);
 
+  if (store.people.length == 0) {
+    console.log("Star Wars characters: ", store?.people);
+  }
   return (
     <div className="text-center mt-5">
       <h1>My Star Wars Database</h1>
+      {store.people.length > 0
+        ? store.people.map((person, index) => {
+            return (
+              <div>
+                <p>{person.name}</p>
+              </div>
+            );
+          })
+        : <p className="loading bg-info-subtle">Loading...</p>}
       <p>
-		<img src={"https://upload.wikimedia.org/wikipedia/commons/c/ce/Star_wars2.svg"} />
+        <img
+          src={
+            "https://upload.wikimedia.org/wikipedia/commons/c/ce/Star_wars2.svg"
+          }
+        />
       </p>
     </div>
   );
