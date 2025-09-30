@@ -2,6 +2,19 @@ img#site-logo {
     width: 70px;
 }
 
+img.profile-image {
+    width: 300px;
+}
+
 .loading {
     color: red;
+}
+
+div.col {
+    border: 1px solid;
+    margin: 20px;
+}
+
+.overflow-x-auto {
+    width: 2000px;
 }

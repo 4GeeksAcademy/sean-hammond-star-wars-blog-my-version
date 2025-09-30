@@ -19,8 +19,22 @@ export const Home = () => {
       });
   };
 
+  // const getHomeworld = () => {
+  //   fetch(store.baseURL + "/planets/" + store.homeworld)
+  //     .then((allHomeworlds) => {
+  //       return allHomeworlds.json();
+  //     })
+  //     .then((data) => {
+  //       dispatch({
+  //         type: "set-homeworld",
+  //         payload: data.results,
+  //       });
+  //     });
+  // };
+
   useEffect(() => {
     getPeople();
+    // getHomeworld();
   }, []);
 
   if (store.people.length == 0) {
@@ -30,13 +44,20 @@ export const Home = () => {
     <div className="text-center mt-5">
       <section>
         <h2 className="text-warning bg-dark text-start ms-5">Characters</h2>
-        <div className="row">
+        <div className="row flex-nowrap overflow-auto">
         {store.people.length > 0 ? (
           store.people.map((person, index) => {
             return (
               <div className="col">
-                <img src="" alt="" />
-                <p>{person.name}</p>
+                <img src={
+                "https://upload.wikimedia.org/wikipedia/commons/c/ce/Star_wars2.svg"
+              } alt="" className="profile-image"/>
+                <h3>{person.name}</h3>
+                <ul>
+                  <li>Planet: {store.homeworld}</li>
+                  <li></li>
+                  <li></li>
+                </ul>
               </div>
             );
           })

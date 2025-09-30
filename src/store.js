@@ -2,6 +2,7 @@ export const initialStore = () => {
   return {
     baseURL: "https://www.swapi.tech/api",
     people: [],
+    homeworld: 1,
   };
 };
 
@@ -14,7 +15,14 @@ export default function storeReducer(store, action = {}) {
         people: action.payload,
       };
 
-    case "test":
+    // case "set-hoemworld":
+    //   console.log("action: ", action.payload)
+    //   return {
+    //     ...store,
+    //     homeworld: action.payload,
+    //   };
+    
+      case "test":
 
     default:
       throw Error("Unknown action.");
