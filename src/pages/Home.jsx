@@ -28,16 +28,23 @@ export const Home = () => {
   }
   return (
     <div className="text-center mt-5">
-      <h1>My Star Wars Database</h1>
-      {store.people.length > 0
-        ? store.people.map((person, index) => {
+      <section>
+        <h2 className="text-warning bg-dark text-start ms-5">Characters</h2>
+        <div className="row">
+        {store.people.length > 0 ? (
+          store.people.map((person, index) => {
             return (
-              <div>
+              <div className="col">
+                <img src="" alt="" />
                 <p>{person.name}</p>
               </div>
             );
           })
-        : <p className="loading bg-info-subtle">Loading...</p>}
+        ) : (
+          <h2 className="loading bg-info-subtle ms-5">Loading...</h2>
+        )}
+        </div>
+      </section>
     </div>
   );
 };
