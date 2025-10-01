@@ -2,7 +2,7 @@ export const initialStore = () => {
   return {
     baseURL: "https://www.swapi.tech/api",
     people: [],
-    mass: 0,
+    peopleMass: [],
   };
 };
 
