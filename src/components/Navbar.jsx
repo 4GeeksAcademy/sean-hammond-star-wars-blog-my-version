@@ -4,26 +4,14 @@ import { Link } from "react-router-dom";
 export const Navbar = () => {
   const { store, dispatch } = useGlobalReducer();
 
-  // const displayFavorites = () => {
-  //   store.favorites.map((favorite, index) => {
-  //     return <li key={index}>{favorite}</li>;
-  //   });
-  // };
-
-  // useEffect(() => {
-  //   displayFavorites();
-  // }, []);
-
-// const favoriteDeletionCheck = (favoriteToCheck, favoriteToDelete) => {
-//     return favoriteToCheck != favoriteToDelete;
-// }
-
-const deleteFavorite = (nameOfFavorite) => {
-      dispatch({
-        type: "set-favorites",
-        payload: nameOfFavorite,
-      });
-    console.log("Favorites array: ", store.favorites);
+  const deleteFavorite = (nameOfFavorite) => {
+    const filteredFavorites = store.favorites.filter((favoriteToCheck)=>{
+      return favoriteToCheck != nameOfFavorite;
+    });
+    dispatch({
+      type: "set-filteredFavorites",
+      payload: filteredFavorites,
+    });
   };
 
   return (
@@ -77,8 +65,14 @@ const deleteFavorite = (nameOfFavorite) => {
                   {store.favorites.map((favorite, index) => {
                     return (
                       <div>
-                        <li key={index}>{favorite}<button className="invisibleButton text-danger"><i class="fa-solid fa-square-xmark"></i></button></li>
-                        
+                        <li key={index}>
+                          {favorite}
+                          <button className="invisibleButton text-danger"
+                          onClick={()=> deleteFavorite(favorite)}
+                          >
+                            <i class="fa-solid fa-square-xmark"></i>
+                          </button>
+                        </li>
                       </div>
                     );
                   })}

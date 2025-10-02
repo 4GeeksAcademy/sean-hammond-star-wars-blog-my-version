@@ -23,10 +23,16 @@ export default function storeReducer(store, action = {}) {
         peopleProperties: action.payload,
       };
 
-      case "set-favorites":
+    case "set-favorites":
       return {
         ...store,
-        favorites: [...store.favorites, action.payload]
+        favorites: [...store.favorites, action.payload],
+      };
+
+    case "set-filteredFavorites":
+      return {
+        ...store,
+        favorites: action.payload,
       };
 
     case "test":
