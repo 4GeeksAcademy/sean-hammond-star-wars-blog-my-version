@@ -1,6 +1,31 @@
+import useGlobalReducer from "../hooks/useGlobalReducer.jsx";
 import { Link } from "react-router-dom";
 
 export const Navbar = () => {
+  const { store, dispatch } = useGlobalReducer();
+
+  // const displayFavorites = () => {
+  //   store.favorites.map((favorite, index) => {
+  //     return <li key={index}>{favorite}</li>;
+  //   });
+  // };
+
+  // useEffect(() => {
+  //   displayFavorites();
+  // }, []);
+
+// const favoriteDeletionCheck = (favoriteToCheck, favoriteToDelete) => {
+//     return favoriteToCheck != favoriteToDelete;
+// }
+
+const deleteFavorite = (nameOfFavorite) => {
+      dispatch({
+        type: "set-favorites",
+        payload: nameOfFavorite,
+      });
+    console.log("Favorites array: ", store.favorites);
+  };
+
   return (
     <nav className="navbar navbar-light bg-light">
       <div className="container">
@@ -14,7 +39,9 @@ export const Navbar = () => {
             />
           </span>
         </Link>
-		<span><h1 className="text-decoration-none">Star Wars Database</h1></span>
+        <span>
+          <h1 className="text-decoration-none">Star Wars Database</h1>
+        </span>
         <div className="ml-auto">
           <button
             className="btn btn-primary"
@@ -46,6 +73,16 @@ export const Navbar = () => {
                   ></button>
                 </div>
                 <div className="modal-body">Characters:</div>
+                <ul>
+                  {store.favorites.map((favorite, index) => {
+                    return (
+                      <div>
+                        <li key={index}>{favorite}<button className="invisibleButton text-danger"><i class="fa-solid fa-square-xmark"></i></button></li>
+                        
+                      </div>
+                    );
+                  })}
+                </ul>
                 <div className="modal-footer">
                   <button
                     type="button"
@@ -53,9 +90,6 @@ export const Navbar = () => {
                     data-bs-dismiss="modal"
                   >
                     Close
-                  </button>
-                  <button type="button" className="btn btn-primary">
-                    Save changes
                   </button>
                 </div>
               </div>

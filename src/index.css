@@ -18,3 +18,8 @@ div.col {
 .overflow-x-auto {
     width: 2000px;
 }
+
+.invisibleButton {
+    background: transparent;
+    border: none;
+}
