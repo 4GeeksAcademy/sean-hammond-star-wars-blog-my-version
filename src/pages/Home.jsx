@@ -48,6 +48,7 @@ export const Home = () => {
           payload: Object.assign([], store.peopleProperties, {
             [personUID - 1]: data.result.properties,
           }),
+          // I don't entirely understand this Object.assign thing. I found it online, I think as a desperate attempt at a solution to the never-ending load time for the people properties. I do understand what the dispatch is doing and I commented out the code parts I had in there before.
         });
       });
   };
